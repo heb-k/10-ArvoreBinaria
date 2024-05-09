@@ -1,15 +1,15 @@
 #include <iostream>
 using namespace std;
-
+ 
 // definicao de tipo
 struct NO {
 	int valor;
 	NO* esq;
 	NO* dir;
 };
-
+ 
 NO* raiz = NULL;
-
+ 
 // headers
 // estrutura principal
 void menu();
@@ -17,22 +17,21 @@ void inicializar();
 void inserir();
 void exibir();
 void exibirQuantidade();
-
-
-
+ 
+ 
 // funcoes auxiliares Arvore
 NO* insereArvore(NO* no, int valor);
 NO* criaNO(int valor);
 int elementosArvore(NO* no);
 void exibirElementosArvore(NO* no);
 //--------------------------
-
-
+ 
+ 
 int main()
 {
 	menu();
 }
-
+ 
 void menu()
 {
 	int op = 0;
@@ -44,12 +43,12 @@ void menu()
 		cout << "2 - Exibir quantidade de elementos \n";
 		cout << "3 - Inserir elemento \n";
 		cout << "4 - Exibir elementos \n";
-
+ 
 		cout << "5 - Sair \n";
-
+ 
 		cout << "Opcao: ";
 		cin >> op;
-
+ 
 		switch (op)
 		{
 		case 1: inicializar();
@@ -63,22 +62,21 @@ void menu()
 		default:
 			break;
 		}
-
+ 
 		system("pause"); // somente no windows
 	}
 }
-
+ 
 void inicializar()
 {
-
-	// provisÛrio porque n„o libera a memoria usada pela arvore
+ 
+	// provis√≥rio porque n√£o libera a memoria usada pela arvore
 	NO* raiz = NULL;
-	
 	cout << "Arvore inicializada \n";
-
+ 
 }
-
-
+ 
+ 
 void inserir()
 {
 	int valor;
@@ -90,20 +88,19 @@ void inserir()
 	else {
 		 insereArvore(raiz, valor);
 	}
-
-
+ 
+ 
 }
-
+ 
 void exibirQuantidade() {
 	cout << "Quantidade de elementos: " << elementosArvore(raiz) << endl;
-	
 }
-
+ 
 void exibir() {
 	exibirElementosArvore(raiz);
 }
-
-
+ 
+ 
 NO* criaNO(int valor)
 {
 	NO* novo = (NO*)malloc(sizeof(NO));
@@ -111,14 +108,14 @@ NO* criaNO(int valor)
 	{
 		return NULL;
 	}
-
+ 
 	novo->valor = valor;
 	novo->esq = NULL;
 	novo->dir = NULL;
-
+ 
 	return novo;
 }
-
+ 
 NO* insereArvore(NO* no, int valor)
 {
 	if (no->valor > valor && no->esq == NULL) {
@@ -138,19 +135,27 @@ NO* insereArvore(NO* no, int valor)
 	else {
 		return NULL;
 	}
-	
 }
-
+ 
 int elementosArvore(NO* no)
 {
 	if (no == NULL) {
 		return 0;
 	}
-
+ 
 	return 1 + elementosArvore(no->esq) + elementosArvore(no->dir);
 }
-
+ 
 void exibirElementosArvore(NO* no)
 {
+	if (no == NULL) {
+		return;
+	}
+
+	exibirElementosArvore(no->esq);
+	cout << no->valor << endl;
+	exibirElementosArvore(no->dir);
+ 
+ 
 	
 }
